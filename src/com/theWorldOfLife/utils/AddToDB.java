@@ -81,11 +81,11 @@ public class AddToDB {
 	}
 
 	public static void addToTheDB(DatabaseEntry newDatabaseEntry) {
-		
+
 		try {
 			connectAelDatabase();
 			prepStmt = conn.prepareStatement(sql);
-			
+
 			prepStmt.setString(1, newDatabaseEntry.getSpeciesName());
 			prepStmt.setString(2, newDatabaseEntry.getAniGen());
 			prepStmt.setString(3, newDatabaseEntry.getAniFam());
@@ -99,23 +99,58 @@ public class AddToDB {
 			prepStmt.setString(11, newDatabaseEntry.getAniDom());
 			prepStmt.setString(12, newDatabaseEntry.getAniHab());
 			prepStmt.setString(13, newDatabaseEntry.getAniFamEx());
-			
+
 			prepStmt.executeUpdate();
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public static 
+//		User needs to be able to select animal common name from dropbox.
 	
+	public static DatabaseEntry searchForResults(String searchParam){
+		
+		try {
+			connectAelDatabase();
+			stmt = conn.createStatement();
+			resSet = stmt.executeQuery("SELECT * FROM `the_life_project`.`the_life_project_table`)");
+		
+			while (resSet.next()) {
+				String userSearchParam = resSet.getString("`common_name`");
+				
+				if (searchParam.equalsIgnoreCase(userSearchParam)) {
+					
+					DatabaseEntry databEntry = new DatabaseEntry();
+					
+					databEntry.setSpeciesName(resSet.getString("`species_name`"));
+					databEntry.setAniGen(resSet.getString("`genus`"));
+					databEntry.setAniFam(resSet.getString("`family`"));
+					databEntry.setAniOrd(resSet.getString("`order_`"));
+					databEntry.setAniClas(resSet.getString("`class`"));
+					databEntry.setAniPhy(resSet.getString("`phylum`"));
+					databEntry.setAniKin(resSet.getString("`kingdom`"));
+					databEntry.setAniCom(resSet.getString("`common_name`"));
+					databEntry.setAveWei(resSet.getString("`averge_weight`"));
+					databEntry.setAveLif(resSet.getString("`average_lifespan`"));
+					databEntry.setAniDom(resSet.getString("`domesticated`"));
+					databEntry.setAniHab(resSet.getString("`habitats`"));
+					databEntry.setAniFamEx(resSet.getString("`famous_examples`"));
+					
+					return databEntry;
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			System.out.println(ex.getMessage());
+		}
+		return null;
+	}
+
 	private static String sql = "INSERT INTO `the_life_project`.`the_life_project_table`"
- + "(`species_name`, `genus`, `family`, `order_`, `class`, `phylum`, "
- + "`kingdom`, `common_name`, `averge_weight`, `average_lifespan`, "
- + "`domesticated`, `habitats`, `famous_examples`) "
- + " VALUES "
- + "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "(`species_name`, `genus`, `family`, `order_`, `class`, `phylum`, "
+			+ "`kingdom`, `common_name`, `averge_weight`, `average_lifespan`, "
+			+ "`domesticated`, `habitats`, `famous_examples`) " + " VALUES " + "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 }
-
