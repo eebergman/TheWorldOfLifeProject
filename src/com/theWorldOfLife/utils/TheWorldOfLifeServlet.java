@@ -11,20 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/TheWorldOfLifeServlet")
 public class TheWorldOfLifeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	DatabaseEntry dbEntry = new DatabaseEntry();
-       
-	
-    public TheWorldOfLifeServlet() {
-    	
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	DatabaseEntry dbEntry = new DatabaseEntry();
+
+	public TheWorldOfLifeServlet() {
 		
+		
+		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		dbEntry.setSpeciesName(request.getParameter("form-speciesName"));
 		dbEntry.setAniGen(request.getParameter("form-genus"));
 		dbEntry.setAniFam(request.getParameter("form-family"));
@@ -38,12 +42,17 @@ public class TheWorldOfLifeServlet extends HttpServlet {
 		dbEntry.setAniDom(request.getParameter("form-domes"));
 		dbEntry.setAniHab(request.getParameter("form-habitat"));
 		dbEntry.setAniFamEx(request.getParameter("form-famous"));
-		
-		
+
 		System.out.println(dbEntry);
-		
+
 		System.out.println("stuff");
-	
+
+		AddToDB.addToTheDB(dbEntry);
+
+		if(AddToDB.passOrFail) {
+			response.sendRedirect("index.html");
+		}
+		
 	}
 
 }

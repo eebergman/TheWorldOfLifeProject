@@ -2,17 +2,17 @@ package com.theWorldOfLife.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.sql.PreparedStatement;
 
 public class AddToDB {
 
 	static final String JBDC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root"; 
 	static final String USER = "root";
 	static final String PASSWORD = "sesame";
 	static Scanner sc = new Scanner(System.in);
@@ -21,6 +21,7 @@ public class AddToDB {
 	private static Statement stmt = null;
 	private static PreparedStatement prepStmt = null;
 	private static ResultSet resSet = null;
+	static boolean passOrFail = false;
 
 	public static void connectAelDatabase() {
 
@@ -101,10 +102,12 @@ public class AddToDB {
 			prepStmt.setString(13, newDatabaseEntry.getAniFamEx());
 
 			prepStmt.executeUpdate();
+			passOrFail = true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+			passOrFail = false;
 		}
 	}
 
