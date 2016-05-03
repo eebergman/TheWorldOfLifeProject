@@ -33,16 +33,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>WebContent/theWorldOfLifeProject.css</name>
-			<type>1</type>
-			<location>C:/Users/Erin/Desktop/Programing/Grand Circus/HTML-CSS-JS/TheWorldOfLife/theWorldOfLifeProject.css</location>
-		</link>
-		<link>
-			<name>WebContent/theWorldOfLifeProject.html</name>
-			<type>1</type>
-			<location>C:/Users/Erin/Desktop/Programing/Grand Circus/HTML-CSS-JS/TheWorldOfLife/theWorldOfLifeProject.html</location>
-		</link>
-	</linkedResources>
 </projectDescription>
