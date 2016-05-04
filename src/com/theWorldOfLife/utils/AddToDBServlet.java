@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/TheWorldOfLifeServlet")
-public class TheWorldOfLifeServlet extends HttpServlet {
+public class AddToDBServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	DatabaseEntry dbEntry = new DatabaseEntry();
+	Species dbEntry = new Species();
 
-	public TheWorldOfLifeServlet() {
+	public AddToDBServlet() {
 		
 		
 		
@@ -47,9 +47,9 @@ public class TheWorldOfLifeServlet extends HttpServlet {
 
 		System.out.println("stuff");
 
-		AddToDB.addToTheDB(dbEntry);
+		ConnToDB.addToTheDB(dbEntry);
 
-		if(AddToDB.passOrFail) {
+		if(ConnToDB.passOrFail) {
 			response.sendRedirect("index.html");
 		}
 		

@@ -1,6 +1,6 @@
 package com.theWorldOfLife.utils;
 
-public class DatabaseEntry {
+public class Species {
 	private String speciesName;
 	private String aniGen;
 	private String aniFam;
@@ -15,7 +15,7 @@ public class DatabaseEntry {
 	private String aniHab;
 	private String aniFamEx;
 
-	public DatabaseEntry(String speciesName, String aniGen, String aniFam, String aniOrd, String aniClas, String aniPhy,
+	public Species(String speciesName, String aniGen, String aniFam, String aniOrd, String aniClas, String aniPhy,
 			String aniKin, String aniCom, String aveWei, String aveLif, String aniDom, String aniHab, String aniFamEx) {
 		super();
 		this.speciesName = speciesName;
@@ -33,7 +33,7 @@ public class DatabaseEntry {
 		this.aniFamEx = aniFamEx;
 	}
 
-	public DatabaseEntry() {
+	public Species() {
 		// TODO Auto-generated constructor stub
 	}
 

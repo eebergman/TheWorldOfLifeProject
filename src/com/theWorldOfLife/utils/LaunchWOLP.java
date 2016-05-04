@@ -12,7 +12,7 @@ public class LaunchWOLP {
 		
 		try {
 		Desktop userDesktop = java.awt.Desktop.getDesktop(); 
-		URI url = new URI("http://localhost:8080/TheWorldOfLife/index.html");
+		URI url = new URI("http://localhost:8080/TheWorldOfLife/wofIndex.html");
 		userDesktop.browse(url);
 		
 		}catch (IOException e) {
@@ -23,7 +23,7 @@ public class LaunchWOLP {
 			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 		}
-		AddToDB.connectAelDatabase();
+		ConnToDB.connectAelDatabase();
 	}
 
 }

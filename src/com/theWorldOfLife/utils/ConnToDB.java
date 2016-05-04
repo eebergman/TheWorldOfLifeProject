@@ -9,10 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AddToDB {
+public class ConnToDB {
 
 	static final String JBDC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root"; 
+	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root?autoReconnect=true&useSSL=false"; 
 	static final String USER = "root";
 	static final String PASSWORD = "sesame";
 	static Scanner sc = new Scanner(System.in);
@@ -45,14 +45,14 @@ public class AddToDB {
 	public static void readDatabase() {
 
 		try {
-			ArrayList<DatabaseEntry> entryList = new ArrayList<>();
+			ArrayList<Species> entryList = new ArrayList<>();
 
 			connectAelDatabase();
 			stmt = conn.createStatement();
 			resSet = stmt.executeQuery("SELECT * FROM `the_life_project`.`the_life_project_table`");
 
 			while (resSet.next()) {
-				DatabaseEntry inDb = new DatabaseEntry();
+				Species inDb = new Species();
 
 				inDb.setSpeciesName(resSet.getString("`species_name`"));
 				inDb.setAniGen(resSet.getString("`genus`"));
@@ -71,7 +71,7 @@ public class AddToDB {
 				entryList.add(inDb);
 			}
 
-			for (DatabaseEntry databaseEntry : entryList) {
+			for (Species databaseEntry : entryList) {
 				System.out.println(databaseEntry.getAniCom());
 			}
 
@@ -81,7 +81,7 @@ public class AddToDB {
 		}
 	}
 
-	public static void addToTheDB(DatabaseEntry newDatabaseEntry) {
+	public static void addToTheDB(Species newDatabaseEntry) {
 
 		try {
 			connectAelDatabase();
@@ -113,7 +113,7 @@ public class AddToDB {
 
 //		User needs to be able to select animal common name from dropbox.
 	
-	public static DatabaseEntry searchForResults(String searchParam){
+	public static Species searchForResults(String searchParam){
 		
 		try {
 			connectAelDatabase();
@@ -125,7 +125,7 @@ public class AddToDB {
 				
 				if (searchParam.equalsIgnoreCase(userSearchParam)) {
 					
-					DatabaseEntry databEntry = new DatabaseEntry();
+					Species databEntry = new Species();
 					
 					databEntry.setSpeciesName(resSet.getString("`species_name`"));
 					databEntry.setAniGen(resSet.getString("`genus`"));
